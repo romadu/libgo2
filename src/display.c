@@ -584,8 +584,8 @@ void go2_surface_blit(go2_surface_t* srcSurface, int srcX, int srcY, int srcWidt
     dst.mmuFlag = 1;
     dst.rect.xoffset = dstX;
     dst.rect.yoffset = dstY;
-    dst.rect.width = dstWidth;
-    dst.rect.height = dstHeight;
+    dst.rect.width = 640;
+    dst.rect.height = 480;
     dst.rect.wstride = dstSurface->stride / (go2_drm_format_get_bpp(dstSurface->format) / 8);
     dst.rect.hstride = dstSurface->height;
     dst.rect.format = go2_rkformat_get(dstSurface->format);
@@ -601,15 +601,15 @@ void go2_surface_blit(go2_surface_t* srcSurface, int srcX, int srcY, int srcWidt
             break;
 
         case GO2_ROTATION_DEGREES_90:
-            src.rotation = HAL_TRANSFORM_ROT_90;
+            src.rotation = 0;
             break;
 
         case GO2_ROTATION_DEGREES_180:
-            src.rotation = HAL_TRANSFORM_ROT_180;
+            src.rotation = 0;
             break;
 
         case GO2_ROTATION_DEGREES_270:
-            src.rotation = HAL_TRANSFORM_ROT_270;
+            src.rotation = 0;
             break;
 
         default:
@@ -619,8 +619,8 @@ void go2_surface_blit(go2_surface_t* srcSurface, int srcX, int srcY, int srcWidt
 
     src.rect.xoffset = srcX;
     src.rect.yoffset = srcY;
-    src.rect.width = srcWidth;
-    src.rect.height = srcHeight;
+    src.rect.width = 640;
+    src.rect.height = 480;
     src.rect.wstride = srcSurface->stride / (go2_drm_format_get_bpp(srcSurface->format) / 8);
     src.rect.hstride = srcSurface->height;
     src.rect.format = go2_rkformat_get(srcSurface->format);
@@ -998,8 +998,8 @@ void go2_presenter_post(go2_presenter_t* presenter, go2_surface_t* surface, int 
     dst.mmuFlag = 1;
     dst.rect.xoffset = 0;
     dst.rect.yoffset = 0;
-    dst.rect.width = go2_surface_width_get(dstSurface);
-    dst.rect.height = go2_surface_height_get(dstSurface);
+    dst.rect.width = 640;
+    dst.rect.height = 480;
     dst.rect.wstride = go2_surface_stride_get(dstSurface) / (go2_drm_format_get_bpp(go2_surface_format_get(dstSurface)) / 8);
     dst.rect.hstride = go2_surface_height_get(dstSurface);
     dst.rect.format = go2_rkformat_get(go2_surface_format_get(dstSurface));
