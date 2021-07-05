@@ -45,6 +45,9 @@ typedef struct
     go2_button_state_t top_left;
     go2_button_state_t top_right;
 
+    go2_button_state_t select;
+    go2_button_state_t start;
+
     go2_button_state_t f1;
     go2_button_state_t f2;
     go2_button_state_t f3;
@@ -122,6 +125,8 @@ typedef enum
     Go2InputButton_F4,
     Go2InputButton_F5,
     Go2InputButton_F6,
+    Go2InputButton_SELECT,
+    Go2InputButton_START,
 
     Go2InputButton_TopLeft,
     Go2InputButton_TopRight,
