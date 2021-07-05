@@ -1,1 +1,1 @@
-libgo2 - Support library for the ODROID-GO Advance
+libgo2 - Support library for the Gameforce CHI.
