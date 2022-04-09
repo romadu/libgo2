@@ -178,12 +178,12 @@ static void* input_task(void* arg)
     input->current_state.buttons[Go2InputButton_TopLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TL) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_TopRight] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TR) ? ButtonState_Pressed : ButtonState_Released;
 
-    input->current_state.buttons[Go2InputButton_F1] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY1) ? ButtonState_Pressed : ButtonState_Released;
-    input->current_state.buttons[Go2InputButton_F2] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY2) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_F1] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY2) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_F2] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY1) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_F3] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY3) ? ButtonState_Pressed : ButtonState_Released;
-    input->current_state.buttons[Go2InputButton_F4] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY4) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_F4] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY6) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_F5] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY5) ? ButtonState_Pressed : ButtonState_Released;
-    input->current_state.buttons[Go2InputButton_F6] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY6) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_F6] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TRIGGER_HAPPY4) ? ButtonState_Pressed : ButtonState_Released;
 
     input->current_state.buttons[Go2InputButton_TriggerLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TL2) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_TriggerRight] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TR2) ? ButtonState_Pressed : ButtonState_Released;
