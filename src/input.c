@@ -41,7 +41,7 @@ Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
 
 static const char* EVDEV_NAME = "/dev/input/by-path/platform-odroidgo2-joypad-event-joystick";
 static const char* EVDEV_NAME_2 = "/dev/input/by-path/platform-odroidgo3-joypad-event-joystick";
-static const char* EVDEV_NAME_3 = "/dev/input/by-path/platform-gameforce-gamepad-event-joystick";
+static const char* EVDEV_NAME_3 = "/dev/input/by-path/platform-singleadc-joypad-event-joystick";
 static const char* BATTERY_STATUS_NAME = "/sys/class/power_supply/battery/status";
 static const char* BATTERY_CAPACITY_NAME = "/sys/class/power_supply/battery/capacity";
 
@@ -192,11 +192,11 @@ static void* input_task(void* arg)
     input->current_state.buttons[Go2InputButton_TriggerLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TL2) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_TriggerRight] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TR2) ? ButtonState_Pressed : ButtonState_Released;
 
-    input->current_state.thumbs[Go2InputThumbstick_Left].y = libevdev_get_event_value(input->dev, EV_ABS, ABS_X) / (float)abs_y_max;
-    input->current_state.thumbs[Go2InputThumbstick_Left].x = libevdev_get_event_value(input->dev, EV_ABS, ABS_Y) / (float)abs_x_max;
+    input->current_state.thumbs[Go2InputThumbstick_Left].x = libevdev_get_event_value(input->dev, EV_ABS, ABS_X) / (float)abs_x_max;
+    input->current_state.thumbs[Go2InputThumbstick_Left].y = libevdev_get_event_value(input->dev, EV_ABS, ABS_Y) / (float)abs_y_max;
 
-    input->current_state.thumbs[Go2InputThumbstick_Right].y = libevdev_get_event_value(input->dev, EV_ABS, ABS_RX) / (float)abs_ry_max;
-    input->current_state.thumbs[Go2InputThumbstick_Right].x = libevdev_get_event_value(input->dev, EV_ABS, ABS_RY) / (float)abs_rx_max;
+    input->current_state.thumbs[Go2InputThumbstick_Right].x = libevdev_get_event_value(input->dev, EV_ABS, ABS_RX) / (float)abs_rx_max;
+    input->current_state.thumbs[Go2InputThumbstick_Right].y = libevdev_get_event_value(input->dev, EV_ABS, ABS_RY) / (float)abs_ry_max;
 
 
     // Events
@@ -293,17 +293,17 @@ static void* input_task(void* arg)
                 switch (ev.code)
                 {
                     case ABS_X:
-                        input->pending_state.thumbs[Go2InputThumbstick_Left].y = ev.value / (float)abs_y_max;
+                        input->pending_state.thumbs[Go2InputThumbstick_Left].x = ev.value / (float)abs_x_max;
                         break;
                     case ABS_Y:
-                        input->pending_state.thumbs[Go2InputThumbstick_Left].x = ev.value / (float)abs_x_max;
+                        input->pending_state.thumbs[Go2InputThumbstick_Left].y = ev.value / (float)abs_y_max;
                         break;
 
                     case ABS_RX:
-                        input->pending_state.thumbs[Go2InputThumbstick_Right].y = ev.value / (float)abs_ry_max;
+                        input->pending_state.thumbs[Go2InputThumbstick_Right].x = ev.value / (float)abs_rx_max;
                         break;
                     case ABS_RY:
-                        input->pending_state.thumbs[Go2InputThumbstick_Right].x = ev.value / (float)abs_rx_max;
+                        input->pending_state.thumbs[Go2InputThumbstick_Right].y = ev.value / (float)abs_ry_max;
                         break;
                 }
             }
@@ -416,8 +416,8 @@ void go2_input_gamepad_read(go2_input_t* input, go2_gamepad_state_t* outGamepadS
 {
     pthread_mutex_lock(&input->gamepadMutex);
     
-    outGamepadState->thumb.x = input->current_state.thumbs[Go2InputThumbstick_Left].y;
-    outGamepadState->thumb.y = input->current_state.thumbs[Go2InputThumbstick_Left].x;
+    outGamepadState->thumb.x = input->current_state.thumbs[Go2InputThumbstick_Left].x;
+    outGamepadState->thumb.y = input->current_state.thumbs[Go2InputThumbstick_Left].y;
 
     outGamepadState->dpad.up = input->current_state.buttons[Go2InputButton_DPadUp];
     outGamepadState->dpad.down = input->current_state.buttons[Go2InputButton_DPadDown];
