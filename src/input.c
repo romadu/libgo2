@@ -171,12 +171,17 @@ static void* input_task(void* arg)
     input->current_state.buttons[Go2InputButton_DPadLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_DPAD_LEFT) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_DPadRight] = libevdev_get_event_value(input->dev, EV_KEY, BTN_DPAD_RIGHT) ? ButtonState_Pressed : ButtonState_Released;
 
-    input->current_state.buttons[Go2InputButton_A] = libevdev_get_event_value(input->dev, EV_KEY, BTN_EAST) ? ButtonState_Pressed : ButtonState_Released;
-    input->current_state.buttons[Go2InputButton_B] = libevdev_get_event_value(input->dev, EV_KEY, BTN_SOUTH) ? ButtonState_Pressed : ButtonState_Released;
-    input->current_state.buttons[Go2InputButton_X] = libevdev_get_event_value(input->dev, EV_KEY, BTN_NORTH) ? ButtonState_Pressed : ButtonState_Released;
-    input->current_state.buttons[Go2InputButton_Y] = libevdev_get_event_value(input->dev, EV_KEY, BTN_WEST) ? ButtonState_Pressed : ButtonState_Released;
+//    input->current_state.buttons[Go2InputButton_A] = libevdev_get_event_value(input->dev, EV_KEY, BTN_EAST) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_A] = libevdev_get_event_value(input->dev, EV_KEY, BTN_SOUTH) ? ButtonState_Pressed : ButtonState_Released;
+//    input->current_state.buttons[Go2InputButton_B] = libevdev_get_event_value(input->dev, EV_KEY, BTN_SOUTH) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_Y] = libevdev_get_event_value(input->dev, EV_KEY, BTN_NORTH) ? ButtonState_Pressed : ButtonState_Released;
+//    input->current_state.buttons[Go2InputButton_X] = libevdev_get_event_value(input->dev, EV_KEY, BTN_NORTH) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_X] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TL) ? ButtonState_Pressed : ButtonState_Released;
+//    input->current_state.buttons[Go2InputButton_Y] = libevdev_get_event_value(input->dev, EV_KEY, BTN_WEST) ? ButtonState_Pressed : ButtonState_Released;
+   input->current_state.buttons[Go2InputButton_B] = libevdev_get_event_value(input->dev, EV_KEY, BTN_WEST) ? ButtonState_Pressed : ButtonState_Released;
 
-    input->current_state.buttons[Go2InputButton_TopLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TL) ? ButtonState_Pressed : ButtonState_Released;
+//    input->current_state.buttons[Go2InputButton_TopLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TL) ? ButtonState_Pressed : ButtonState_Released;
+    input->current_state.buttons[Go2InputButton_TopLeft] = libevdev_get_event_value(input->dev, EV_KEY, BTN_EAST) ? ButtonState_Pressed : ButtonState_Released;
     input->current_state.buttons[Go2InputButton_TopRight] = libevdev_get_event_value(input->dev, EV_KEY, BTN_TR) ? ButtonState_Pressed : ButtonState_Released;
 
     input->current_state.buttons[Go2InputButton_SELECT] = libevdev_get_event_value(input->dev, EV_KEY, BTN_SELECT) ? ButtonState_Pressed : ButtonState_Released;
@@ -233,23 +238,28 @@ static void* input_task(void* arg)
                         input->pending_state.buttons[Go2InputButton_DPadRight] = state;
                         break;
 
-                    case BTN_EAST:
+                    case BTN_EAST: //saturn C
+//                        input->pending_state.buttons[Go2InputButton_A] = state;
+                        input->pending_state.buttons[Go2InputButton_TopLeft] = state;
+                        break;
+                    case BTN_SOUTH: //saturn B
+//                        input->pending_state.buttons[Go2InputButton_B] = state;
                         input->pending_state.buttons[Go2InputButton_A] = state;
                         break;
-                    case BTN_SOUTH:
-                        input->pending_state.buttons[Go2InputButton_B] = state;
-                        break;
-                    case BTN_NORTH:
-                        input->pending_state.buttons[Go2InputButton_X] = state;
-                        break;
-                    case BTN_WEST:
+                    case BTN_NORTH: //saturn X
+//                        input->pending_state.buttons[Go2InputButton_X] = state;
                         input->pending_state.buttons[Go2InputButton_Y] = state;
                         break;
+                    case BTN_WEST: //saturn A
+//                        input->pending_state.buttons[Go2InputButton_Y] = state;
+                        input->pending_state.buttons[Go2InputButton_B] = state;
+                        break;
 
-                    case BTN_TL:
-                        input->pending_state.buttons[Go2InputButton_TopLeft] = state;
+                    case BTN_TL: //saturn Y
+//                        input->pending_state.buttons[Go2InputButton_TopLeft] = state;
+                        input->pending_state.buttons[Go2InputButton_X] = state;
                         break;                    
-                    case BTN_TR:          
+                    case BTN_TR: //saturn Z       
                         input->pending_state.buttons[Go2InputButton_TopRight] = state;
                         break;
 
